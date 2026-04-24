@@ -19,3 +19,8 @@ fn handle_embedded_file(path: &str) -> HttpResponse {
 async fn static_resources(path: web::Path<String>) -> impl Responder {
     handle_embedded_file(path.as_str())
 }
+
+#[actix_web::get("/robots.txt")]
+async fn static_resources_robots() -> impl Responder {
+    handle_embedded_file("robots.txt")
+}
