@@ -32,7 +32,7 @@ async fn static_resources_robots() -> impl Responder {
                 Ok(content) => HttpResponse::Ok()
                     .content_type(from_path(path).first_or_octet_stream().as_ref())
                     .body(content),
-                Err(_) => HttpResponse::InternalServerError().body("Misconfigured path. Please contact server administrator")
+                Err(_) => HttpResponse::InternalServerError().body("robots.txt is not correctly configured. Please contact server administrator") // TODO: Move this to be handled in parsing. Or do we just fall back to bundled?
             }
         },
         None => handle_embedded_file("robots.txt"),
