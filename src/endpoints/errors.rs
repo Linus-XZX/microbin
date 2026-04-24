@@ -1,4 +1,5 @@
-use actix_web::{Error, HttpResponse, error::ErrorNotFound};
+// use actix_web::{Error, HttpResponse, error::ErrorNotFound};
+use actix_web::{Error, HttpResponse};
 use askama::Template;
 
 use crate::args::{Args, ARGS};
