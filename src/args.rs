@@ -140,6 +140,9 @@ pub struct Args {
     #[clap(long, env = "MICROBIN_DEFAULT_PRIVACY")]
     pub default_privacy: Option<String>,
 
+    #[clap(long, env = "MICROBIN_ROBOTS_TXT_PATH")]
+    pub robots_txt_path: Option<String>,
+
     #[clap(
         long,
         env = "MICROBIN_MAX_FILE_SIZE_ENCRYPTED_MB",
@@ -242,6 +245,7 @@ impl Args {
             encryption_client_side: self.encryption_client_side,
             encryption_server_side: self.encryption_server_side,
             default_privacy: None,
+            robots_txt_path: self.robots_txt_path, // TODO: Does this count as secret?
             max_file_size_encrypted_mb: self.max_file_size_encrypted_mb,
             max_file_size_unencrypted_mb: self.max_file_size_unencrypted_mb,
             disable_update_checking: self.disable_update_checking,
