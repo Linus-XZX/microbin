@@ -1,4 +1,2 @@
-# Deployment of https://github.com/Linus-XZX/microbin, forked from https://github.com/szabodanika/microbin
-
 User-agent: *
 Disallow: /
