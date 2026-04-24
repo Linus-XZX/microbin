@@ -1,4 +1,4 @@
-use actix_web::{Error, HttpResponse};
+use actix_web::{Error, HttpResponse, error::ErrorNotFound};
 use askama::Template;
 
 use crate::args::{Args, ARGS};
@@ -10,7 +10,10 @@ pub struct ErrorTemplate<'a> {
 }
 
 pub async fn not_found() -> Result<HttpResponse, Error> {
-    Ok(HttpResponse::Ok()
+    // This is probably the intended way but I can't set Content-Type here...
+    // Err(ErrorNotFound(ErrorTemplate { args: &ARGS }.render().unwrap()))
+    // This looks absolutely weird but in a sense it succeeds in matching nothing probably...?
+    Ok(HttpResponse::NotFound()
         .content_type("text/html; charset=utf-8")
         .body(ErrorTemplate { args: &ARGS }.render().unwrap()))
 }
