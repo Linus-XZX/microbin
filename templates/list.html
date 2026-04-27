@@ -4,11 +4,12 @@
 {% if pastas.is_empty() %}
 <br>
 <p>
-    No uploads yet. 😔 Create one <a href="{{ args.public_path_as_str() }}/">here</a>.
+    <!-- This is a dumb way to force a <a> tag into the localized string... -->
+    {{ t!("list.empty_pre") }}<a href="{{ args.public_path_as_str() }}/">{{ t!("list.link_text") }}</a>{{ t!("list.empty_post") }}
 </p>
 <br>
 {%- else %}
-<h3>Uploads</h3>
+<h3>{{ t!("list.uploads.title") }}</h3>
 <div style="width: 100%; overflow-x: auto;">
     {% if args.pure_html %}
     <table border="1" style="width: 100%; min-width: 720px; white-space: nowrap;">
@@ -17,18 +18,18 @@
             {% endif %}
             <thead>
                 <th style="width: 25%">
-                    Key
+                    {{ t!("list.headers.key") }}
                 </th>
                 <th style="width: 10%">
                 </th>
                 <th style="width: 15%">
-                    Created
+                    {{ t!("list.headers.created") }}
                 </th>
                 <th style="width: 15%">
-                    Expiration
+                    {{ t!("list.headers.expiration") }}
                 </th>
                 <th style="width: 15%">
-                    Contents
+                    {{ t!("list.headers.contents") }}
                 </th>
 
                 <th style="width: 10%">
@@ -48,10 +49,10 @@
                         {% if args.public_path_as_str() != "" %}
                         {% if args.short_path_as_str() == "" %}
                         <a style="margin-right:1rem; cursor: pointer;" class="copy-button" null
-                            data-url="{{ args.public_path_as_str()}}/upload/{{pasta.id_as_animals()}}">Copy</a>
+                            data-url="{{ args.public_path_as_str()}}/upload/{{pasta.id_as_animals()}}">{{ t!("list.actions.copy") }}</a>
                         {% else %}
                         <a style="margin-right:1rem; cursor: pointer;" class="copy-button" data-url="{{ args.short_path_as_str()
-                        }}/p/{{pasta.id_as_animals()}}">Copy</a>
+                        }}/p/{{pasta.id_as_animals()}}">{{ t!("list.actions.copy") }}</a>
                         {% endif %}
                         {%- endif %}
                     </td>
@@ -64,22 +65,22 @@
                     <td>
                         {% if pasta.content != "" %}
                         <a style="margin-right:1rem"
-                            href="{{ args.public_path_as_str()}}/raw/{{pasta.id_as_animals()}}">Text</a>
+                            href="{{ args.public_path_as_str()}}/raw/{{pasta.id_as_animals()}}">{{ t!("list.uploads.types.text") }}</a>
                         {%- endif %}
                         {% if pasta.attachments.is_some() %}
                         <a style="margin-right:1rem"
                             href="{{ args.public_path_as_str() }}/upload/{{pasta.id_as_animals()}}">
-                            {{ 1 + pasta.attachments.as_ref().unwrap().len() }} Files
+                            {{ 1 + pasta.attachments.as_ref().unwrap().len() }} {{ t!("list.uploads.types.files") }}
                         </a>
                         {% else if pasta.file.is_some() %}
                         <a style="margin-right:1rem"
                             href="{{ args.public_path_as_str() }}/file/{{pasta.id_as_animals()}}">
                             {% if pasta.file.as_ref().unwrap().is_image() %}
-                            Image
+                            {{ t!("list.uploads.types.image") }}
                             {%- else if pasta.file.as_ref().unwrap().is_video() %}
-                            Video
+                            {{ t!("list.uploads.types.video") }}
                             {%- else %}
-                            File
+                            {{ t!("list.uploads.types.file") }}
                             {%- endif %}
                         </a>
                         {%- endif %}
@@ -88,12 +89,12 @@
                     <td>
                         {% if pasta.editable %}
                         <a style="margin-right:1rem"
-                            href="{{ args.public_path_as_str() }}/edit/{{pasta.id_as_animals()}}">Edit</a>
+                            href="{{ args.public_path_as_str() }}/edit/{{pasta.id_as_animals()}}">{{ t!("list.actions.edit") }}</a>
                         {%- endif %}
                     </td>
                     <td>
                         {% if pasta.editable || pasta.readonly || pasta.encrypt_server %}
-                        <a href="{{ args.public_path_as_str() }}/remove/{{pasta.id_as_animals()}}">Remove</a>
+                        <a href="{{ args.public_path_as_str() }}/remove/{{pasta.id_as_animals()}}">{{ t!("list.actions.remove") }}</a>
                         {%- endif %}
                     </td>
                 </tr>
@@ -102,7 +103,7 @@
             </tbody>
         </table>
         <br>
-        <h3>URL Redirects</h3>
+        <h3>{{ t!("list.redirect.title") }}</h3>
         {% if args.pure_html %}
         <table border="1" style="width: 100%; min-width: 720px; ">
             {% else %}
@@ -110,15 +111,15 @@
                 {% endif %}
                 <thead>
                     <th style=" width: 25%">
-                        Key
+                        {{ t!("list.headers.key") }}
                     </th>
                     <th style="width: 10%">
                     </th>
                     <th style="width: 15%">
-                        Created
+                        {{ t!("list.headers.created") }}
                     </th>
                     <th style="width: 15%">
-                        Expiration
+                        {{ t!("list.headers.expiration") }}
                     </th>
                     <th style="width: 15%">
                     </th>
@@ -137,10 +138,10 @@
                     <td>
                         {% if args.short_path_as_str() == "" %}
                         <a style="margin-right:1rem; cursor: pointer;" class="copy-button"
-                            data-url="{{ args.public_path_as_str()                    }}/url/{{pasta.id_as_animals()}}">Copy</a>
+                            data-url="{{ args.public_path_as_str()                    }}/url/{{pasta.id_as_animals()}}">{{ t!("list.actions.copy") }}</a>
                         {% else %}
                         <a style="margin-right:1rem; cursor: pointer;" class="copy-button" data-url="{{ args.short_path_as_str()
-                        }}/u/{{pasta.id_as_animals()}}">Copy</a>
+                        }}/u/{{pasta.id_as_animals()}}">{{ t!("list.actions.copy") }}</a>
                         {% endif %}
                     </td>
                     <td>
@@ -151,17 +152,17 @@
                     </td>
                     <td>
                         <a style="margin-right:1rem"
-                            href="{{ args.public_path_as_str() }}/url/{{pasta.id_as_animals()}}">Redirect</a>
+                            href="{{ args.public_path_as_str() }}/url/{{pasta.id_as_animals()}}">{{ t!("list.actions.redirect") }}</a>
                     </td>
                     <td>
                         {% if pasta.editable %}
                         <a style="margin-right:1rem"
-                            href="{{ args.public_path_as_str() }}/edit/{{pasta.id_as_animals()}}">Edit</a>
+                            href="{{ args.public_path_as_str() }}/edit/{{pasta.id_as_animals()}}">{{ t!("list.actions.edit") }}</a>
                         {%- endif %}
                     </td>
                     <td>
                         {% if pasta.editable || pasta.readonly || pasta.encrypt_server %}
-                        <a href="{{ args.public_path_as_str() }}/remove/{{pasta.id_as_animals()}}">Remove</a>
+                        <a href="{{ args.public_path_as_str() }}/remove/{{pasta.id_as_animals()}}">{{ t!("list.actions.remove") }}</a>
                         {%- endif %}
                     </td>
                 </tr>
@@ -180,9 +181,9 @@
         copyURLBtns.item(i).addEventListener("click", event => {
             event.srcElement
             navigator.clipboard.writeText(event.srcElement.getAttribute("data-url"))
-            event.srcElement.innerHTML = "Copied"
+            event.srcElement.innerHTML = '{{ t!("list.copied") }}'
             setTimeout(() => {
-                event.srcElement.innerHTML = "Copy"
+                event.srcElement.innerHTML = '{{ t!("list.actions.copy") }}'
             }, 1000)
         })
     }

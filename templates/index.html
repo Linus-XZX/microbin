@@ -168,7 +168,7 @@
 
         {% if args.highlightsyntax %}
         <div>
-            <label for="syntax_highlight">{{ t!("upload.highlight.index_title") }} <sup> <a href="{{ args.public_path_as_str() }}/guide#syntax">?</a></sup></label><br>
+            <label for="syntax_highlight">{{ t!("upload.highlight.title") }} <sup> <a href="{{ args.public_path_as_str() }}/guide#syntax">?</a></sup></label><br>
             <select style="width: 100%;" name="syntax_highlight" id="syntax_highlight">
                 <option value="none">{{ t!("upload.highlight.none") }}</option>
                 <optgroup label='{{ t!("upload.highlight.client") }}'>
@@ -212,24 +212,24 @@
         <div>
             <label for="privacy">{{ t!("upload.privacy.title") }} <sup> <a href="{{ args.public_path_as_str() }}/guide#privacy">?</a></sup></label><br>
             <select style="width: 100%;" name="privacy" id="privacy">
-                <optgroup label="Unencrypted (no password)">
-                    <option value="public"{% if default_privacy_value == "public" %} selected{% endif %}>Public</option>
+                <optgroup label='{{ t!("upload.privacy.groups.unprotected") }}'>
+                    <option value="public"{% if default_privacy_value == "public" %} selected{% endif %}>{{ t!("upload.privacy.public.title") }}</option>
                     {% if args.private %}
-                    <option value="unlisted"{% if default_privacy_value == "unlisted" %} selected{% endif %}>Unlisted</option>
+                    <option value="unlisted"{% if default_privacy_value == "unlisted" %} selected{% endif %}>{{ t!("upload.privacy.unlisted.title") }}</option>
                     {%- endif %}
                 </optgroup>
                 {% if args.enable_readonly %}
-                <optgroup label="Unencrypted (protected)">
-                    <option value="readonly"{% if default_privacy_value == "readonly" %} selected{% endif %}>Read-only</option>
+                <optgroup label='{{ t!("upload.privacy.groups.protected") }}'>
+                    <option value="readonly"{% if default_privacy_value == "readonly" %} selected{% endif %}>{{ t!("upload.privacy.readonly.title") }}</option>
                 </optgroup>
                 {%- endif %}
                 {% if args.encryption_client_side || args.encryption_server_side %}
-                <optgroup label="Encrypted">
+                <optgroup label='{{ t!("upload.privacy.groups.secured") }}'>
                     {% if args.encryption_server_side %}
-                    <option value="private"{% if default_privacy_value == "private" %} selected{% endif %}>Private</option>
+                    <option value="private"{% if default_privacy_value == "private" %} selected{% endif %}>{{ t!("upload.privacy.private.title") }}</option>
                     {%- endif %}
                     {% if args.encryption_client_side%}
-                    <option value="secret"{% if default_privacy_value == "secret" %} selected{% endif %}>Secret</option>
+                    <option value="secret"{% if default_privacy_value == "secret" %} selected{% endif %}>{{ t!("upload.privacy.secret.title") }}</option>
                     {%- endif %}
                 </optgroup>
                 {%- endif %}
@@ -239,21 +239,21 @@
 
         {% if args.encryption_client_side || args.encryption_server_side || args.enable_readonly %}
         <div>
-            <label for="password_field">Password <sup><a href="{{ args.public_path_as_str() }}/guide#password">?</a></sup></label><br>
+            <label for="password_field">{{ t!("upload.password.title") }} <sup><a href="{{ args.public_path_as_str() }}/guide#password">?</a></sup></label><br>
             <input style="width: 130px; height: 28px;" type="password" id="password_field" autocomplete="off" />
         </div>
         {%- endif %}
 
     </div>
 
-    <label>Content</label>
+    <label>{{ t!("index.header") }}</label>
     <textarea style="width: 100%; min-height: 100px; margin-bottom: 2em; font-family: monospace;" id="content-input"
-        autofocus placeholder="Type something here."></textarea>
+        autofocus placeholder='{{ t!("index.placeholder") }}'></textarea>
     <div id="buttons">
         <div id="file-select">
             {% if !args.no_file_upload %}
             <label for="file" id="attach-file-button-label">
-                <a role="button" id="attach-file-button">Select or drop file attachment</a>
+                <a role="button" id="attach-file-button">{{ t!("index.file") }}</a>
             </label>
             <br>
             <input type="file" id="file" name="file" multiple />
@@ -262,16 +262,16 @@
         <div>
             {% if args.readonly %}
             {% if status == "incorrect" %}
-            <input type="password" id="uploader_password" name="uploader_password" placeholder="Incorrect password!"
+            <input type="password" id="uploader_password" name="uploader_password" placeholder='{{ t!("index.fail") }}'
                 style="width: 100%; background-color: rgba(255, 0, 0, 0.137);" />
             {% else %}
-            <input type="password" id="uploader_password" name="uploader_password" placeholder="Uploader Password"
+            <input type="password" id="uploader_password" name="uploader_password" placeholder='{{ t!("index.password") }}'
                 style="width: 100%;" />
             {% endif %}
             {% endif %}
         </div>
         <div>
-            <input type="submit" id="submit-button"  value="Save"
+            <input type="submit" id="submit-button"  value='{{ t!("index.save") }}'
                 style="width: 100%; background-color: #2975D2; color: white;" />
         </div>
     </div>

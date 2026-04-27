@@ -36,34 +36,75 @@ upload:
     1read: "访问1次"
     xread: "访问%{count}次"
   highlight:
-    title: "语法高亮"
-    index_title: "语言"
+    title: "语言"
+    guide_title: "语言"
     desc: "为上传内容启用语法高亮，这将提升代码内容的可读性。您可以选择浏览器端高亮（可以自动检测语言），或服务器端高亮（需要提前手动选择语言，但不依赖JavaScript）。"
     none: "纯文本"
     auto: "自动"
     client: "客户端渲染"
     server: "服务器渲染"
   password:
-    title: "密码保护"
+    title: "密码"
     desc: "为您的上传内容设定密码。上传内容在服务器端也由该密码进行加密，因此您之后访问（私密或秘密等级）或修改（启用只读时）也需要提供密码。您的密码保存时已进行加密（对于秘密等级的内容，服务器端则完全不经手密码）。"
   privacy:
     title: "隐私等级"
     desc: "选择上传内容的隐私等级。对于私密或可信的MicroBin实例可以选择较低的等级，而公用实例应对应较高等级。"
-    level1:
-      title: "1级：公开"
+    xlevel: "%{level}级："
+    groups:
+      # TODO: Revise wording
+      unprotected: "未加密（无密码保护）"
+      protected: "未加密（密码保护）"
+      secured: "加密"
+    public:
+      title: "公开"
       desc: "所有访问者都可以列出、查看、修改或删除这条内容。"
-    level2:
-      title: "2级：未列出（推荐设置）"
+    unlisted:
+      title: "未列出"
       desc: "内容不会在公开列表上列出，需要提供上传时生成的ID才能访问。所有知道这个ID的访问者都可以查看、修改或删除这条内容。"
-    level3:
-      title: "3级：只读"
+    readonly:
+      title: "只读"
       desc: "内容不会在公开列表上列出，需要提供上传时生成的ID才能访问。所有知道这个ID的访问者都可以查看，但需要额外提供上传密码才能修改或删除。"
-    level4:
-      title: "4级：私密"
+    private:
+      title: "私密"
       desc: "内容不会在公开列表上列出，需要提供上传时生成的ID和上传密码才能访问。上传内容和附件在服务器端加密保存。"
-    level5:
-      title: "5级：秘密"
+    # Inb4 we get scrappers here
+    secret:
+      title: "秘密"
       desc: "内容不会在公开列表上列出，需要提供上传时生成的ID和上传密码才能访问。上传内容和附件在客户端加密后发送给服务器，因此服务器完全不经手明文内容。该等级下访问数据将需要多次输入密码，但提供最高的安全性。"
+
+index:
+  header: "内容"
+  placeholder: "请输入文本"
+  file: "选择文件或拖拽至此处"
+  password: "上传密码"
+  fail: "上传密码错误！"
+  save: "保存"
+
+list:
+  empty_pre: "没有上传内容可以列出。😔"
+  link_text: "点击此处"
+  empty_post: "创建一个。"
+  copied: "已复制"
+  headers:
+    key: "ID"
+    created: "创建时间"
+    expiration: "过期时间"
+    contents: "内容"
+  actions:
+    copy: "复制URL"
+    edit: "编辑"
+    remove: "删除"
+    redirect: "重定向"
+  uploads:
+    title: "上传内容"
+    types:
+      text: "文本"
+      files: "文件"
+      image: "图像"
+      video: "视频"
+      file: "文件"
+  redirect:
+    title: "URL重定向"
 
 status:
   warning: "警告"

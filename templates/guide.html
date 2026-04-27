@@ -21,7 +21,7 @@
 
 {% if args.highlightsyntax %}
 <a id="syntax">
-  <h3>{{ t!("upload.highlight.title") }}</h3>
+  <h3>{{ t!("upload.highlight.guide_title") }}</h3>
 </a>
 <p>
   {{ t!("upload.highlight.desc") }}
@@ -41,16 +41,16 @@
 <p>
   {{ t!("upload.privacy.desc") }}
 </p>
-<h4>{{ t!("upload.privacy.level1.title") }}</h4>
-<p>{{ t!("upload.privacy.level1.desc") }}</p>
-<h4>{{ t!("upload.privacy.level2.title") }}</h4>
-<p>{{ t!("upload.privacy.level2.desc") }}</p>
-<h4>{{ t!("upload.privacy.level3.title") }}</h4>
-<p>{{ t!("upload.privacy.level3.desc") }}</p>
-<h4>{{ t!("upload.privacy.level4.title") }}</h4>
-<p>{{ t!("upload.privacy.level4.desc") }}</p>
-<h4>{{ t!("upload.privacy.level5.title") }}</h4>
-<p>{{ t!("upload.privacy.level5.desc") }}</p>
+<h4>{{ t!("upload.privacy.xlevel", level => "1")}}{{ t!("upload.privacy.public.title") }}</h4>
+<p>{{ t!("upload.privacy.public.desc") }}</p>
+<h4>{{ t!("upload.privacy.xlevel", level => "2")}}{{ t!("upload.privacy.unlisted.title") }}</h4>
+<p>{{ t!("upload.privacy.unlisted.desc") }}</p>
+<h4>{{ t!("upload.privacy.xlevel", level => "3")}}{{ t!("upload.privacy.readonly.title") }}</h4>
+<p>{{ t!("upload.privacy.readonly.desc") }}</p>
+<h4>{{ t!("upload.privacy.xlevel", level => "4")}}{{ t!("upload.privacy.private.title") }}</h4>
+<p>{{ t!("upload.privacy.private.desc") }}</p>
+<h4>{{ t!("upload.privacy.xlevel", level => "5")}}{{ t!("upload.privacy.secret.title") }}</h4>
+<p>{{ t!("upload.privacy.secret.desc") }}</p>
 
 
 {% include "footer.html" %}
