@@ -107,6 +107,8 @@ async fn main() -> std::io::Result<()> {
         start_telemetry_thread();
     }
 
+    rust_i18n::set_locale(&ARGS.default_locale);
+
     HttpServer::new(move || {
         App::new()
             .app_data(data.clone())

@@ -26,6 +26,9 @@ pub struct Args {
     #[clap(long, env = "MICROBIN_ADMIN_PASSWORD", default_value = "m1cr0b1n")]
     pub auth_admin_password: SecretArg,
 
+    #[clap(long, env = "MICROBIN_DEFAULT_LOCALE", default_value = "en")]
+    pub default_locale: String,
+
     #[clap(long, env = "MICROBIN_EDITABLE", action = clap::ArgAction::Set, default_value_t = true)]
     pub editable: bool,
 
@@ -205,6 +208,7 @@ impl Args {
             auth_basic_password: None,
             auth_admin_username: crate::args::SecretArg(String::from("")),
             auth_admin_password: crate::args::SecretArg(String::from("")),
+            default_locale: self.default_locale,
             editable: self.editable,
             footer_text: self.footer_text,
             hide_footer: self.hide_footer,
