@@ -1,5 +1,9 @@
 extern crate core;
 
+// Load I18n macro, for allow you use `t!` macro in anywhere.
+#[macro_use]
+extern crate rust_i18n;
+
 use crate::args::ARGS;
 use crate::endpoints::{
     admin, archive, auth_admin, auth_upload, create, edit, errors, file, guide, list,
@@ -56,6 +60,8 @@ pub mod endpoints {
 pub struct AppState {
     pub pastas: Mutex<Vec<Pasta>>,
 }
+
+i18n!();
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

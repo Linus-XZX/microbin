@@ -1,0 +1,6 @@
+_version: 1
+
+header:
+  new: "新建"
+  list: "列表"
+  guide: "指南"

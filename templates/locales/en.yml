@@ -1,0 +1,7 @@
+_version: 1
+
+header:
+  new: "New"
+  list: "List"
+  guide: "Guide"
+

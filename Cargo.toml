@@ -39,6 +39,7 @@ reqwest = { version = "0.12", default-features = false, features = ["charset",
 "http2", "macos-system-configuration", "json", "blocking"] }
 rusqlite = { version = "0.32", features = ["bundled"], optional = true }
 rust-embed = "8.3.0"
+rust-i18n = "3"
 
 # The rustls-rustcrypto version must support the rustls version and the
 # rustls version must match the one expected by reqwest;
@@ -73,3 +74,15 @@ __zstd = ["actix-web/compress-zstd"]
 [profile.release]
 lto = true
 strip = true
+
+[package.metadata.i18n]
+# The available locales for your application, default: ["en"].
+available-locales = ["en", "zh-cn"]
+
+# The default locale, default: "en".
+default-locale = "en"
+
+# Path for your translations YAML file, default: "locales".
+# This config for let `cargo i18n` command line tool know where to find your translations.
+# You must keep this path same as the one you pass to method `rust_i18n::i18n!`.
+load-path = "templates/locales"
