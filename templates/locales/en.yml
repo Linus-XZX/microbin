@@ -5,3 +5,5 @@ header:
   list: "List"
   guide: "Guide"
 
+guide:
+  options: "Options"
