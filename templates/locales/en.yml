@@ -8,3 +8,9 @@ header:
 guide:
   options: "Options"
   expiration: "Expiration"
+
+status:
+  warning: "WARNING"
+  messages:
+    public_path: "Warning: No public URL set with --public-path parameter. QR code and URL Copying functions have been disabled"
+    default_cred: "Warning: You are using the default admin login details. This is a security risk, please change them."

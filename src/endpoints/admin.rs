@@ -63,14 +63,18 @@ pub async fn post_admin(
     let mut status = "OK";
     let mut message = "";
 
+    let status_warning = t!("status.warning");
+    let warning_public_path = t!("status.messages.public_path");
+    let warning_default_cred = t!("status.messages.default_cred");
+
     if ARGS.public_path.is_none() {
-        status = "WARNING";
-        message = "Warning: No public URL set with --public-path parameter. QR code and URL Copying functions have been disabled"
+        status = &status_warning;
+        message = &warning_public_path
     }
 
     if *ARGS.auth_admin_username == "admin" && *ARGS.auth_admin_password == "m1cr0b1n" {
-        status = "WARNING";
-        message = "Warning: You are using the default admin login details. This is a security risk, please change them."
+        status = &status_warning;
+        message = &warning_default_cred
     }
 
     let update;

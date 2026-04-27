@@ -8,3 +8,9 @@ header:
 guide:
   options: "选项"
   expiration: "过期"
+
+status:
+  warning: "警告"
+  messages:
+    public_path: "警告：没有指定外部访问路径（--public-path）。二维码和复制链接功能将无法使用。"
+    default_cred: "警告：管理员用户名和密码为源代码提供的初始值，这将导致安全风险，应尽快更改。"
