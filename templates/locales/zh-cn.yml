@@ -4,3 +4,7 @@ header:
   new: "新建"
   list: "列表"
   guide: "指南"
+
+guide:
+  options: "选项"
+  expiration: "过期"
