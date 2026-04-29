@@ -118,7 +118,8 @@ async fn main() -> std::io::Result<()> {
             // ConnectionInfo::realip_remote_addr(). it picks up headers like
             // X-Real-IP / X-Forwarded-For when the framework is behind a proxy.
             )
-            // TODO: Changing locale globally on each request is a ***VERY*** bad idea
+            // FIXME: Changing locale globally on each request is a ***VERY*** bad idea.
+            // But it works as long as you don't get... two users at once?
             .wrap_fn(|req, srv| {
                 match req.headers().get("accept-language") {
                     Some(hv) => {
