@@ -80,10 +80,10 @@ strip = true
 
 [package.metadata.i18n]
 # The available locales for your application, default: ["en"].
-available-locales = ["en", "zh-cn"]
+available-locales = ["en-US", "zh-CN"]
 
 # The default locale, default: "en".
-default-locale = "en"
+default-locale = "en-US"
 
 # Path for your translations YAML file, default: "locales".
 # This config for let `cargo i18n` command line tool know where to find your translations.
