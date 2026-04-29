@@ -107,6 +107,8 @@ async fn main() -> std::io::Result<()> {
         start_telemetry_thread();
     }
 
+    rust_i18n::set_locale(&ARGS.default_locale);
+
     HttpServer::new(move || {
         App::new()
             .app_data(data.clone())
@@ -126,13 +128,13 @@ async fn main() -> std::io::Result<()> {
                             Ok(req_languages) => {
                                 match accept_language::intersection(req_languages, &rust_i18n::available_locales!()).get(0) {
                                     Some(locale) => rust_i18n::set_locale(locale),
-                                    None => rust_i18n::set_locale(&ARGS.default_locale),
+                                    None => (),
                                 }
                             }
-                            Err(_) => rust_i18n::set_locale(&ARGS.default_locale),
+                            Err(_) => (),
                         }
                     }
-                    None => rust_i18n::set_locale(&ARGS.default_locale),
+                    None => (),
                 }
                 srv.call(req)
             })
