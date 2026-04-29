@@ -15,7 +15,7 @@ fn handle_embedded_file(path: &str) -> HttpResponse {
         Some(content) => HttpResponse::Ok()
             .content_type(from_path(path).first_or_octet_stream().as_ref())
             .body(content.data.into_owned()),
-        None => HttpResponse::NotFound().body("404 Not Found"),
+        None => HttpResponse::NotFound().content_type("text/plain").body("404 Not Found"),
     }
 }
 
@@ -37,4 +37,14 @@ async fn static_resources_robots() -> impl Responder {
         },
         None => handle_embedded_file("robots.txt"),
     }
+}
+
+#[actix_web::get("/sitemap.xml")]
+async fn static_resources_sitemap() -> impl Responder {
+    handle_embedded_file("sitemap.xml")
+}
+
+#[actix_web::get("/favicon.ico")]
+async fn static_resources_favicon() -> impl Responder {
+    handle_embedded_file("favicon.ico")
 }
