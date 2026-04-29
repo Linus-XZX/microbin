@@ -11,7 +11,7 @@ fn handle_embedded_file(path: &str) -> HttpResponse {
         Some(content) => HttpResponse::Ok()
             .content_type(from_path(path).first_or_octet_stream().as_ref())
             .body(content.data.into_owned()),
-        None => HttpResponse::NotFound().body("404 Not Found"),
+        None => HttpResponse::NotFound().content_type("text/plain").body("404 Not Found"),
     }
 }
 
