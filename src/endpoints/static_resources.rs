@@ -24,3 +24,13 @@ async fn static_resources(path: web::Path<String>) -> impl Responder {
 async fn static_resources_robots() -> impl Responder {
     handle_embedded_file("robots.txt")
 }
+
+#[actix_web::get("/sitemap.xml")]
+async fn static_resources_sitemap() -> impl Responder {
+    handle_embedded_file("sitemap.xml")
+}
+
+#[actix_web::get("/favicon.ico")]
+async fn static_resources_favicon() -> impl Responder {
+    handle_embedded_file("favicon.ico")
+}
