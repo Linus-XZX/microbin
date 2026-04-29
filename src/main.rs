@@ -13,11 +13,12 @@ use crate::pasta::Pasta;
 use crate::util::db::read_all;
 use crate::util::telemetry::start_telemetry_thread;
 use actix_web::middleware::Condition;
-use actix_web::{middleware, web, App, HttpServer};
+use actix_web::{middleware, web, App, HttpServer, dev::Service as _};
 use actix_web_httpauth::middleware::HttpAuthentication;
 use chrono::Local;
 use env_logger::Builder;
 use log::LevelFilter;
+use rust_embed::RustEmbed;
 use std::fs;
 use std::io::Write;
 use std::sync::Mutex;
@@ -61,7 +62,7 @@ pub struct AppState {
     pub pastas: Mutex<Vec<Pasta>>,
 }
 
-i18n!();
+i18n!(/* "locales" */);
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -107,8 +108,6 @@ async fn main() -> std::io::Result<()> {
         start_telemetry_thread();
     }
 
-    rust_i18n::set_locale(&ARGS.default_locale);
-
     HttpServer::new(move || {
         App::new()
             .app_data(data.clone())
@@ -119,6 +118,24 @@ async fn main() -> std::io::Result<()> {
             // ConnectionInfo::realip_remote_addr(). it picks up headers like
             // X-Real-IP / X-Forwarded-For when the framework is behind a proxy.
             )
+            // TODO: Changing locale globally on each request is a ***VERY*** bad idea
+            .wrap_fn(|req, srv| {
+                match req.headers().get("accept-language") {
+                    Some(hv) => {
+                        match hv.to_str() {
+                            Ok(req_languages) => {
+                                match accept_language::intersection(req_languages, &rust_i18n::available_locales!()).get(0) {
+                                    Some(locale) => rust_i18n::set_locale(locale),
+                                    None => rust_i18n::set_locale(&ARGS.default_locale),
+                                }
+                            }
+                            Err(_) => rust_i18n::set_locale(&ARGS.default_locale),
+                        }
+                    }
+                    None => rust_i18n::set_locale(&ARGS.default_locale),
+                }
+                srv.call(req)
+            })
             // Conditional / Public Services
             .service(pasta_endpoint::getpasta)
             .service(pasta_endpoint::postpasta)

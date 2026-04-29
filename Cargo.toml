@@ -39,7 +39,10 @@ reqwest = { version = "0.12", default-features = false, features = ["charset",
 "http2", "macos-system-configuration", "json", "blocking"] }
 rusqlite = { version = "0.32", features = ["bundled"], optional = true }
 rust-embed = "8.3.0"
+
+# i18n
 rust-i18n = "3"
+accept-language = "3.1.0"
 
 # The rustls-rustcrypto version must support the rustls version and the
 # rustls version must match the one expected by reqwest;
