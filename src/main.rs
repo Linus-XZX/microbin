@@ -18,7 +18,6 @@ use actix_web_httpauth::middleware::HttpAuthentication;
 use chrono::Local;
 use env_logger::Builder;
 use log::LevelFilter;
-use rust_embed::RustEmbed;
 use std::fs;
 use std::io::Write;
 use std::sync::Mutex;
